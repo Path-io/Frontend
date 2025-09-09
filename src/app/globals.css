@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -41,6 +40,40 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --font-inter: 'Inter', sans-serif;
+  --color-background: #FFFFFF;
+  --color-foreground: #020618;
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #62748E;
+  --color-card: #FFFFFF;
+  --color-card-foreground: #020618;
+  --color-popover: #FFFFFF;
+  --color-popover-foreground: #020618;
+  --color-border: #E2E8F0;
+  --color-input: #E2E8F0;
+  --color-primary: #155DFC;
+  --color-primary-foreground: #F8FAFC;
+  --color-secondary: #F1F5F9;
+  --color-secondary-foreground: #0F172B;
+  --color-accent: #F1F5F9;
+  --color-accent-foreground: #0F172B;
+  --color-destructive: #E7000B;
+  --color-destructive-foreground: #F8FAFC;
+  --color-ring: #020618;
+  --color-chart-1: #E76E50;
+  --color-chart-2: #2A9D90;
+  --color-chart-3: #274754;
+  --color-chart-4: #274754;
+  --color-chart-5: #F4A462;
+  --color-sidebar-background: #F8FAFC;
+  --color-sidebar-foreground: #314158;
+  --color-sidebar-primary: #0F172B;
+  --color-sidebar-primary-foreground: #F8FAFC;
+  --color-sidebar-accent: #F1F5F9;
+  --color-sidebar-accent-foreground: #0F172B;
+  --color-sidebar-border: #E2E8F0;
+  --color-sidebar-ring: #155DFC;
 }
 
 :root {
