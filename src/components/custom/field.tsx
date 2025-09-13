@@ -9,15 +9,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
+import CustomPassword from "./password";
 
 const CustomField = ({
   control,
   formValue,
   placeholder,
+  description,
+  formLabel,
+  password
 }: {
   control: Control<any>;
   formValue: string;
   placeholder?: string;
+  description?: string;
+  formLabel?: string;
+  password?: boolean
 }) => {
   return (
     <FormField
@@ -25,10 +32,13 @@ const CustomField = ({
       name={formValue}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="capitalize">{formValue}</FormLabel>
+          <FormLabel className="capitalize">{formLabel ? formLabel : formValue}</FormLabel>
           <FormControl>
-            <Input placeholder={placeholder} {...field} />
+            { password ? <CustomPassword placeholder={placeholder} {...field} /> : <Input placeholder={placeholder} {...field} />}
           </FormControl>
+          <FormDescription>
+            {description}
+          </FormDescription>
           <FormMessage />
         </FormItem>
       )}

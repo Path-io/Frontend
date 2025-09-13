@@ -7,8 +7,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="bg-primary-foreground md:px-[6%] hidden md:flex w-1/2 gap-8 flex-col items-center justify-center">
+    <div className="flex items-center justify-center">
+      <div className="bg-primary-foreground md:px-[6%] min-h-screen h-full hidden md:flex w-1/2 gap-8 flex-col items-center justify-center">
         <div className="logo w-full flex items-start">
           <Image
             src={"/logo/logo-dark-2xl.svg"}

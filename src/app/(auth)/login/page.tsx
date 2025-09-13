@@ -1,22 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import { pros } from "@/lib/staticLists";
 import { loginSchema } from "@/lib/form-schema";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  Form
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import CustomField from "@/components/custom/field";
 import { Button } from "@/components/ui/button";
 
@@ -54,6 +45,7 @@ export default function LoginPage() {
             control={form.control}
             formValue="password"
             placeholder="••••••••••"
+            password
           />
           <Button type="submit" className="w-full">
             Login
