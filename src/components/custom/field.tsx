@@ -1,5 +1,4 @@
 import {
-  Form,
   FormControl,
   FormDescription,
   FormField,
@@ -8,23 +7,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Control } from "react-hook-form";
+import { Control, Path } from "react-hook-form";
 import CustomPassword from "./password";
 
-const CustomField = ({
+const CustomField = <TFieldValues extends object>({
   control,
   formValue,
   placeholder,
   description,
   formLabel,
-  password
+  password,
 }: {
-  control: Control<any>;
-  formValue: string;
+  control: Control<TFieldValues>;
+  formValue: Path<TFieldValues>;
   placeholder?: string;
   description?: string;
   formLabel?: string;
-  password?: boolean
+  password?: boolean;
 }) => {
   return (
     <FormField
@@ -32,13 +31,17 @@ const CustomField = ({
       name={formValue}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="capitalize">{formLabel ? formLabel : formValue}</FormLabel>
+          <FormLabel className="capitalize">
+            {formLabel ? formLabel : formValue}
+          </FormLabel>
           <FormControl>
-            { password ? <CustomPassword placeholder={placeholder} {...field} /> : <Input placeholder={placeholder} {...field} />}
+            {password ? (
+              <CustomPassword placeholder={placeholder} {...field} />
+            ) : (
+              <Input placeholder={placeholder} {...field} />
+            )}
           </FormControl>
-          <FormDescription>
-            {description}
-          </FormDescription>
+          <FormDescription>{description}</FormDescription>
           <FormMessage />
         </FormItem>
       )}

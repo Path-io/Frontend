@@ -58,7 +58,7 @@ export default function LoginPage() {
       <div className="footer mt-2 items-center md:items-start text-center text-sm flex flex-col-reverse md:flex-col gap-4">
         <p className="flex gap-1">
           {" "}
-          <span className="hidden md:flex">Don't have an account? </span>
+          <span className="hidden md:flex">Don&apos;t have an account? </span>
           <span className="md:hidden">New to Path.io? </span>{" "}
           <Link className="underline" href={"/register"}>
             Sign up
