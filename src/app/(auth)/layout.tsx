@@ -7,7 +7,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center min-h-screen h-full justify-center">
       <div className="bg-primary-foreground md:px-[6%] min-h-screen h-full hidden md:flex w-1/2 gap-8 flex-col items-center justify-center">
         <div className="logo w-full flex items-start">
           <Image
@@ -53,8 +53,8 @@ export default function AuthLayout({
           </p>
         </div>
       </div>
-      <div className="bg-white w-full md:w-1/2 flex items-center justify-center">
-            {children}
+      <div className="bg-white h-full w-full md:w-1/2 flex items-center justify-center">
+        {children}
       </div>
     </div>
   );
