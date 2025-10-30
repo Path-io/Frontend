@@ -24,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import { supabase } from "@/client";
 
 export default function SignUp() {
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -36,8 +37,22 @@ export default function SignUp() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof registerSchema>) {
-    console.log(data);
+  async function onSubmit(info: z.infer<typeof registerSchema>) {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: info.email,
+        password: info.password,
+      });
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      console.log(data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (

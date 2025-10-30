@@ -10,8 +10,11 @@ import {
 } from "@/components/ui/form";
 import CustomField from "@/components/custom/field";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/client";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -20,8 +23,17 @@ export default function LoginPage() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof loginSchema>) {
-    console.log(data);
+  async function onSubmit(info: z.infer<typeof loginSchema>) {
+    try{
+      const{ data, error } = await supabase.auth.signInWithPassword({
+        email: info.email,
+        password: info.password,
+      })
+      console.log(data);
+      router.push('/');
+    } catch(err) {
+      console.error(err);
+    }
   }
   return (
     <div className="form w-full flex flex-col justify-center px-[10%] md:px-[20%] space-y-8 text-foreground">
@@ -47,7 +59,7 @@ export default function LoginPage() {
             placeholder="••••••••••"
             password
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full cursor-pointer">
             Login
           </Button>
           <Button type="submit" variant={"outline"} className="w-full">
