@@ -40,6 +40,28 @@ export default function LoginPage() {
       console.error(err);
     }
   }
+
+  async function handleGoogle(){
+    try{
+      const {error} = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          queryParams: {
+            access_type: "offline",
+            prompt: "consent"
+          }
+        }
+      })
+
+      if (error) {
+        console.error("Error signing in with Google:", error);
+        return;
+      }
+    }catch(error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="form w-full flex flex-col justify-center px-[10%] md:px-[20%] space-y-8 text-foreground">
       <div className="title">
@@ -67,7 +89,7 @@ export default function LoginPage() {
           <Button type="submit" className="w-full cursor-pointer">
             Login
           </Button>
-          <Button type="submit" variant={"outline"} className="w-full">
+          <Button onClick={handleGoogle} variant={"outline"} className="w-full">
             Login with Google
           </Button>
         </form>
