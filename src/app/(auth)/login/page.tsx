@@ -25,11 +25,16 @@ export default function LoginPage() {
 
   async function onSubmit(info: z.infer<typeof loginSchema>) {
     try{
-      const{ data, error } = await supabase.auth.signInWithPassword({
+      const{ error } = await supabase.auth.signInWithPassword({
         email: info.email,
         password: info.password,
       })
-      console.log(data);
+
+      if(error){
+        console.error("Error occurred while signing in:", error);
+        return;
+      }
+
       router.push('/');
     } catch(err) {
       console.error(err);

@@ -3,15 +3,15 @@
 import { supabase } from "@/client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Session } from "@supabase/supabase-js";
 
 export default function Home() {
   const router = useRouter();
-  const [session, setSession] = useState<any | undefined>(undefined);
+  const [session, setSession] = useState<Session | undefined | null>(undefined);
   const [loading, setLoading] = useState(true);
 
   const fetchSession = async () => {
     const currentSession = await supabase.auth.getSession();
-    console.log(currentSession.data.session, currentSession.data, currentSession);
     setSession(currentSession.data.session);
     setLoading(false);
   }
@@ -38,7 +38,7 @@ export default function Home() {
     if(!session){
       router.push('/login')
     }
-  }, [session, loading])
+  }, [session, loading, router])
 
   return (
     <> <button className="cursor-pointer" onClick={logOut}>Log out</button> </>
