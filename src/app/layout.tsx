@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Path.io",
-  description: "A platform that gets out of your way and helps you focus on what matters most: learning and teaching.",
+  description:
+    "A platform that gets out of your way and helps you focus on what matters most: learning and teaching.",
   icons: {
     icon: [
       { url: "/metadata/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -27,10 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased ${inter.className}`}
-      >
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className={`antialiase h-full ${inter.className}`}>
+        <ThemeProvider
+          attribute={"class"}
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

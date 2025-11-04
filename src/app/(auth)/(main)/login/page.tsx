@@ -63,7 +63,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="form w-full flex flex-col justify-center px-[10%] md:px-[20%] space-y-8 text-foreground">
+    <div className="form w-full flex bg-background flex-col justify-center px-[10%] md:px-[20%] space-y-8 text-foreground">
       <div className="title">
         <h2 className="text-xl font-bold">Login</h2>
         <p className="text-sm text-muted-foreground">

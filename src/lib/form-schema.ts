@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { email } from "zod";
 
 const passwordRegex =
   /^(?=\S+$)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,128}$/;
@@ -36,3 +36,7 @@ export const registerSchema = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
+export const resetSchema = z.object({
+  email: z.email()
+})

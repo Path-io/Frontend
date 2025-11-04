@@ -1,7 +1,7 @@
 import { pros } from "@/lib/staticLists";
 import Image from "next/image";
 
-export default function AuthLayout({
+export default function AuthMainLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
