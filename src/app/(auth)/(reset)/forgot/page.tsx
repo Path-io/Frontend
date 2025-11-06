@@ -39,6 +39,7 @@ export default function ResetPage() {
       console.log(error);
       return;
     }
+    sessionStorage.setItem("resetEmail", info.email);
     router.push("/check");
   }
 
