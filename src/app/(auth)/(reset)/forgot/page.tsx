@@ -29,11 +29,12 @@ export default function ResetPage() {
       email: "",
     },
   });
-
+  
   async function onSubmit(info: z.infer<typeof resetSchema>) {
     const { error } = await supabase.auth.resetPasswordForEmail(info.email, {
-      redirectTo: `${process.env.BASE_URL}/forgot`,
+      redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}update`,
     });
+
 
     if (error) {
       console.log(error);

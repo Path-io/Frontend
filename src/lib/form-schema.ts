@@ -38,5 +38,20 @@ export const registerSchema = z
   });
 
 export const resetSchema = z.object({
-  email: z.email()
-})
+  email: z.email(),
+});
+
+export const updatePasswordSchema = z.object({
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(128, "Password must be at most 128 characters")
+    .regex(
+      passwordRegex,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces"
+    ),
+  confirmPassword: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(128, "Password must be at most 128 characters"),
+});
