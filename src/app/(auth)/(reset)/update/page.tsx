@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -56,24 +56,24 @@ export default function UpdatePassword() {
     router.replace("/login");
   }
 
-  const searchParams = useSearchParams();
-
   useEffect(() => {
     let timeoutId: number | null = null;
-    const type = searchParams.get("type");
-    const token = searchParams.get("access_token") || searchParams.get("token");
+    const qp =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search)
+        : null;
+    const type = qp?.get("type");
+    const token = qp?.get("access_token") || qp?.get("token");
 
     if (type === "recovery" || token) {
       setIsValidRecovery(true);
     }
 
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event === "PASSWORD_RECOVERY") {
-          setIsValidRecovery(true);
-        }
+    const { data: listener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        setIsValidRecovery(true);
       }
-    );
+    });
 
     supabase.auth
       .getSession()
@@ -90,8 +90,9 @@ export default function UpdatePassword() {
 
     return () => {
       if (listener?.subscription) listener.subscription.unsubscribe();
+      if (timeoutId) window.clearTimeout(timeoutId);
     };
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     if (recoveryChecked && !isValidRecovery) {

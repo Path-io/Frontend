@@ -25,8 +25,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { supabase } from "@/client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function SignUp() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -39,7 +42,7 @@ export default function SignUp() {
 
   async function onSubmit(info: z.infer<typeof registerSchema>) {
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: info.email,
         password: info.password,
       });
@@ -48,8 +51,8 @@ export default function SignUp() {
         console.error(error);
         return;
       }
-
-      console.log(data);
+      toast.success("Check your email for a surprise!")
+      router.replace("/logim");
     } catch (err) {
       console.error(err);
     }
@@ -134,7 +137,7 @@ export default function SignUp() {
             formLabel="Confirm Password"
             password
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full cursor-pointer">
             Create Account <FaArrowRight />
           </Button>
           <Button onClick={handleGoogle} type="button" variant={"outline"} className="w-full">

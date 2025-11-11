@@ -13,12 +13,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-interface resendTimerType {
-  cooldown: number;
-  disabled: boolean;
-  attempts: number;
-}
-
 export default function CheckEmail() {
   const BASE_SECONDS = 30;
   const [attempts, setAttempts] = useState<number>(1);
@@ -63,7 +57,7 @@ export default function CheckEmail() {
         window.clearInterval(intervalRef.current);
       }
     };
-  }, []);
+  }, [attempts]);
 
   const handleResend = async () => {
     if (!resetEmail) {
